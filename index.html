@@ -7,7 +7,7 @@
 <meta name="description" content="A broadsheet showcase of web applications built by Anubrat — ERP, fintech, ESG, and campus platforms, set in newsprint." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Playfair+Display+SC:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Playfair+Display+SC:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --paper:#f4efe3;
@@ -62,24 +62,30 @@
   .brow .mid{letter-spacing:.34em;font-weight:600;}
   .nameplate{
     text-align:center;
-    padding:14px 0 6px;
+    padding:18px 0 8px;
     border-bottom:1px solid var(--line);
+    position:relative;
   }
   .nameplate h1{
-    font-family:"UnifrakturCook","Playfair Display",serif;
-    font-weight:700;
-    font-size:clamp(46px,10.5vw,128px);
-    line-height:.9;
+    font-family:"Bodoni Moda","Playfair Display",serif;
+    font-optical-sizing:auto;
+    font-weight:900;
+    font-size:clamp(32px,7.5vw,92px);
+    line-height:1;
     margin:0;
-    letter-spacing:.5px;
+    letter-spacing:.004em;
     color:var(--ink);
-    text-shadow:0 1px 0 rgba(255,255,255,.35);
+    -webkit-font-smoothing:antialiased;
+  }
+  .nameplate h1 .amp{
+    font-style:italic;font-weight:700;
   }
   .nameplate .sub{
-    font-family:"Playfair Display SC","Playfair Display",serif;
-    letter-spacing:.42em;text-transform:uppercase;
-    font-size:clamp(9px,1.5vw,13px);color:var(--ink-soft);
-    margin-top:8px;padding-top:8px;border-top:1px solid var(--line-soft);
+    font-family:"Cormorant Garamond","Playfair Display",serif;
+    font-weight:600;font-style:italic;
+    letter-spacing:.34em;text-transform:uppercase;
+    font-size:clamp(10px,1.5vw,14px);color:var(--ink-soft);
+    margin-top:12px;padding-top:10px;border-top:1px solid var(--line-soft);
     display:inline-block;
   }
   .dateline{
@@ -295,9 +301,15 @@
   footer p,footer a{font-size:13px;color:var(--ink-soft);text-decoration:none;display:block;margin:0 0 6px;}
   footer a:hover{color:var(--accent);}
   .colophon-note{
-    text-align:center;font-family:"Special Elite",monospace;font-size:11px;color:var(--muted);
-    margin-top:40px;padding-top:16px;border-top:1px solid var(--line-soft);letter-spacing:.05em;
+    text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;
+    font-size:15.5px;color:var(--muted);line-height:1.5;
+    margin-top:40px;padding-top:18px;border-top:1px solid var(--line-soft);letter-spacing:.015em;
   }
+  .colophon-note .fleuron{
+    display:block;font-style:normal;color:var(--line-soft);
+    font-size:15px;margin-bottom:8px;letter-spacing:.5em;
+  }
+  .colophon-note b{font-style:normal;font-weight:600;color:var(--ink-soft);}
 
   /* ---------- REVEAL ---------- */
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease;}
@@ -561,7 +573,7 @@
     </div>
   </footer>
 
-  <div class="colophon-note">— Type-set in UnifrakturCook, Playfair Display &amp; PT Serif · Printed on virtual newsprint · © MMXXVI —</div>
+  <div class="colophon-note"><span class="fleuron">❦</span>Masthead set in <b>Bodoni Moda</b>, composed in <b>Playfair Display</b> &amp; <b>Cormorant Garamond</b> — impressed upon virtual newsprint. All rights reserved, Est. MMXXVI.</div>
 
 </div>
 

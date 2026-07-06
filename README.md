@@ -27,9 +27,10 @@ python3 -m http.server 4399
 
 ## Design
 
-Blackletter masthead (UnifrakturCook), Playfair Display headlines, PT Serif body, paper-grain
-texture, drop caps, double rules, halftone engraving plates, and a colophon footer. Fully
-responsive with a subtle print-reveal on scroll (respects `prefers-reduced-motion`).
+High-contrast Didone masthead (Bodoni Moda), Cormorant Garamond detailing, Playfair Display
+headlines, PT Serif body, paper-grain texture, drop caps, double rules, browser-framed
+screenshot plates, and a colophon footer. Fully responsive with a subtle print-reveal on
+scroll (respects `prefers-reduced-motion`).
 
 ---
 
