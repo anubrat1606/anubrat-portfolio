@@ -17,6 +17,7 @@ presented as classic halftone engraving plates.
 | **Student Loan Smart Planner** | Fintech | React 19, Vite, Recharts, Framer Motion |
 | **Carbon Sync Hub** | Climate tech | TypeScript, React, Vite, Tailwind |
 | **Lab Pulse** | EdTech · Proctoring | React, Firebase, WebRTC, Chart.js |
+| **AI CRM Automation** | Automation · AI agents | n8n, OpenAI GPT-4o-mini, SendGrid, Slack, Google Sheets |
 
 ## Running locally
 

@@ -171,6 +171,19 @@
   .plate .shot.center{object-position:center;}
   .plate.mini{margin:2px 0 12px;box-shadow:0 2px 0 rgba(0,0,0,.12), inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--line);}
   .plate.mini .shot{height:220px;}
+  /* wide schematic plate for the workflow diagram */
+  .plate.wide .shot{height:auto;object-fit:contain;background:#f6f4ee;filter:none;}
+  .plate.wide .live-badge{top:auto;bottom:14px;right:14px;}
+  /* automation desk: headline + two-column body */
+  .automation-body{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:18px;}
+  .automation-body .col-rule{border-right:1px solid var(--line-soft);padding-right:40px;}
+  .automation-body h3{
+    font-family:"Playfair Display",serif;font-weight:900;
+    font-size:clamp(26px,3.6vw,38px);line-height:1;margin:0 0 8px;letter-spacing:-.01em;
+  }
+  .automation-body .deck{font-style:italic;color:var(--ink-soft);font-size:16px;margin:0 0 14px;}
+  .automation-body p{font-size:15px;margin:0 0 12px;}
+  @media(max-width:820px){.automation-body{grid-template-columns:1fr;}.automation-body .col-rule{border-right:0;padding-right:0;}}
   .plate .live-badge.proof{background:var(--ink);}
   .plate .live-badge.proof::before{background:#c69a2e;animation:none;}
   .plate .live-badge{
@@ -377,7 +390,7 @@
     <h2>By the Numbers</h2><div class="bars"></div><span class="tag">Circulation</span>
   </div>
   <div class="ledger reveal">
-    <div><div class="n">07</div><div class="l">Applications</div></div>
+    <div><div class="n">08</div><div class="l">Projects</div></div>
     <div><div class="n">03</div><div class="l">Live on Press</div></div>
     <div><div class="n">05</div><div class="l">Domains Covered</div></div>
     <div><div class="n">∞</div><div class="l">Attention to Craft</div></div>
@@ -530,11 +543,44 @@
     <div class="story reveal" style="display:flex;flex-direction:column;justify-content:center;text-align:center;">
       <div class="no" style="justify-content:center;">Classifieds</div>
       <h3 style="font-size:26px;">Available for Commissions</h3>
-      <p class="deck" style="text-align:center;">Full-stack web applications — ERP, fintech, ESG and campus platforms — designed and built end to end.</p>
+      <p class="deck" style="text-align:center;">Full-stack web apps and AI automations — ERP, fintech, ESG, campus platforms and n8n agent workflows — designed and built end to end.</p>
       <p style="font-family:'Special Elite',monospace;font-size:13px;color:var(--muted);">Enquiries to the address in the colophon below.</p>
       <a class="readmore" style="align-self:center;" href="https://github.com/anubrat1606" target="_blank" rel="noopener">See the full press <span class="arr">→</span></a>
     </div>
 
+  </div>
+
+  <!-- ===================== AUTOMATION DESK ===================== -->
+  <div class="section-head reveal">
+    <h2>Automation Desk</h2><div class="bars"></div><span class="tag">AI Agents · n8n</span>
+  </div>
+  <div class="reveal" style="border-top:1px solid var(--line);padding-top:22px;">
+    <div class="no" style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center;margin-bottom:14px;">Story No. 08 · Automated CRM · Outbound<span style="flex:1;height:1px;background:var(--line-soft);"></span></div>
+    <div class="plate wide">
+      <span class="live-badge proof">Live Workflow</span>
+      <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">n8n · POST /proposal-request</span></div>
+      <img class="shot" src="shots/n8n-crm.png" alt="n8n CRM automation — intake, validate, AI generation and multi-channel delivery" loading="lazy" />
+    </div>
+    <div class="caption"><b>FIG. 8.</b> The automation itself — intake &amp; validation, client-type routing, AI proposal generation, and multi-channel delivery, node by node.</div>
+
+    <div class="automation-body">
+      <div class="col-rule">
+        <h3>The Sales Desk, on Autopilot</h3>
+        <p class="deck">An n8n automation with AI agents that turns a raw CRM lead into a personalised proposal — drafted, sent, logged and announced without a human in the loop.</p>
+        <div class="byline"><span>Filed under <b>Automation</b></span><span>n8n · OpenAI · SendGrid · Slack · Sheets</span></div>
+        <p>Wired into the CRM by webhook, the workflow normalises and validates every inbound lead, converts the budget to a pricing tier, and routes the request by client type — startup, enterprise, agency, nonprofit — applying conditional pricing and discounts as it goes. Missing data bounces back an automated validation email before anything else runs.</p>
+      </div>
+      <div>
+        <p>From there an AI agent takes over: OpenAI (GPT-4o-mini) drafts a seven-section, fully personalised proposal from the client details, scope and pricing, which is formatted into a branded HTML email with an investment-breakdown table.</p>
+        <p>Delivery fans out in one pass — <em>SendGrid</em> emails the proposal, <em>Google Sheets</em> appends a tracking row, and <em>Slack</em> pings the team — then a JSON success response returns to the caller. It is the outbound engine behind an AI-driven, self-running CRM.</p>
+        <div class="tags">
+          <span class="tag-chip">n8n</span><span class="tag-chip">OpenAI GPT-4o-mini</span>
+          <span class="tag-chip">SendGrid</span><span class="tag-chip">Slack</span>
+          <span class="tag-chip">Google Sheets</span><span class="tag-chip">Webhook</span><span class="tag-chip">AI Agent</span>
+        </div>
+        <a class="readmore dead" href="#" onclick="return false">Private automation · By request <span class="arr">▪</span></a>
+      </div>
+    </div>
   </div>
 
   <!-- ===================== COLOPHON ===================== -->
@@ -556,6 +602,7 @@
       <p>Fintech · Payments</p>
       <p>Sustainability · ESG</p>
       <p>EdTech · Proctoring</p>
+      <p>Automation · AI Agents</p>
     </div>
   </footer>
 
