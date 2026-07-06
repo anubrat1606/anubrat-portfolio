@@ -70,13 +70,17 @@
     font-family:"Bodoni Moda","Playfair Display",serif;
     font-optical-sizing:auto;
     font-weight:900;
-    font-size:clamp(32px,7.5vw,92px);
-    line-height:1;
+    font-size:clamp(30px,7.5vw,92px);
+    line-height:1.02;
     margin:0;
     letter-spacing:.004em;
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
+    max-width:100%;
+    overflow-wrap:break-word;
+    padding:0 4px;
   }
+  .nameplate h1 .np-a,.nameplate h1 .np-b{white-space:nowrap;}
   .nameplate h1 .amp{
     font-style:italic;font-weight:700;
   }
@@ -324,7 +328,7 @@
     </div>
 
     <div class="nameplate">
-      <h1>The&nbsp;Anubrat&nbsp;Dispatch</h1>
+      <h1><span class="np-a">The&nbsp;Anubrat</span> <span class="np-b">Dispatch</span></h1>
       <div class="sub">Selected Works &nbsp;·&nbsp; A Broadsheet of Web Applications &nbsp;·&nbsp; Portfolio Edition</div>
     </div>
 
