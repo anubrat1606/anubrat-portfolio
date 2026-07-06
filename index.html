@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Anubrat Dispatch — Portfolio Edition</title>
+<meta name="description" content="A broadsheet showcase of web applications built by Anubrat — ERP, fintech, ESG, and campus platforms, set in newsprint." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Playfair+Display+SC:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f4efe3;
+    --paper-2:#efe8d8;
+    --ink:#181510;
+    --ink-soft:#2c2820;
+    --muted:#6c6455;
+    --line:#413b30;
+    --line-soft:#b9ad95;
+    --accent:#8a1c12;      /* stamp red */
+    --accent-2:#1c3a2e;    /* seal green */
+    --hair:1px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"PT Serif",Georgia,serif;
+    line-height:1.5;
+    /* paper grain */
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,.020) 0, transparent 55%),
+      radial-gradient(circle at 80% 60%, rgba(0,0,0,.018) 0, transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+  ::selection{background:var(--accent);color:var(--paper);}
+  a{color:inherit;}
+
+  .sheet{
+    max-width:1180px;
+    margin:0 auto;
+    padding:22px 26px 90px;
+  }
+
+  /* ---------- FOLD / TAPE ---------- */
+  .fold{
+    position:fixed;top:0;left:50%;transform:translateX(-50%);
+    width:1px;height:100%;
+    background:linear-gradient(to bottom, transparent, rgba(0,0,0,.05), transparent);
+    pointer-events:none;z-index:1;
+  }
+
+  /* ---------- MASTHEAD ---------- */
+  .brow{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-family:"Oswald",sans-serif;text-transform:uppercase;
+    letter-spacing:.14em;font-size:11px;color:var(--ink-soft);
+    border-bottom:2px solid var(--line);padding-bottom:7px;
+  }
+  .brow .mid{letter-spacing:.34em;font-weight:600;}
+  .nameplate{
+    text-align:center;
+    padding:14px 0 6px;
+    border-bottom:1px solid var(--line);
+  }
+  .nameplate h1{
+    font-family:"UnifrakturCook","Playfair Display",serif;
+    font-weight:700;
+    font-size:clamp(46px,10.5vw,128px);
+    line-height:.9;
+    margin:0;
+    letter-spacing:.5px;
+    color:var(--ink);
+    text-shadow:0 1px 0 rgba(255,255,255,.35);
+  }
+  .nameplate .sub{
+    font-family:"Playfair Display SC","Playfair Display",serif;
+    letter-spacing:.42em;text-transform:uppercase;
+    font-size:clamp(9px,1.5vw,13px);color:var(--ink-soft);
+    margin-top:8px;padding-top:8px;border-top:1px solid var(--line-soft);
+    display:inline-block;
+  }
+  .dateline{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:6px;
+    font-family:"Oswald",sans-serif;text-transform:uppercase;
+    letter-spacing:.16em;font-size:10.5px;color:var(--ink-soft);
+    border-top:2px solid var(--line);border-bottom:1px solid var(--line);
+    padding:6px 2px;margin-top:2px;
+  }
+  .dateline .price{border:1px solid var(--line);padding:2px 8px;letter-spacing:.2em;}
+
+  /* ---------- HEADLINE STACK ---------- */
+  .lead-head{
+    text-align:center;
+    font-family:"Playfair Display",serif;
+    font-weight:900;
+    font-size:clamp(34px,6.8vw,80px);
+    line-height:.98;
+    letter-spacing:-.01em;
+    margin:26px auto 8px;
+    max-width:15ch;
+  }
+  .lead-deck{
+    text-align:center;font-style:italic;color:var(--ink-soft);
+    font-size:clamp(15px,2.1vw,21px);max-width:60ch;margin:0 auto 4px;
+  }
+  .kicker{
+    text-align:center;font-family:"Oswald",sans-serif;
+    text-transform:uppercase;letter-spacing:.42em;
+    font-size:12px;color:var(--accent);font-weight:600;margin:20px 0 2px;
+  }
+  .rule-fancy{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    color:var(--muted);margin:16px auto 0;max-width:340px;
+  }
+  .rule-fancy::before,.rule-fancy::after{content:"";height:1px;flex:1;background:var(--line-soft);}
+  .rule-fancy span{font-size:13px;letter-spacing:.3em;}
+
+  /* ---------- LEAD LAYOUT ---------- */
+  .lead-grid{
+    display:grid;grid-template-columns:1.15fr 1fr;gap:0;
+    margin-top:22px;border-top:3px double var(--line);
+  }
+  .lead-grid > div{padding:22px 26px;}
+  .lead-grid .col-left{border-right:1px solid var(--line-soft);}
+  .dropcap::first-letter{
+    font-family:"Playfair Display",serif;font-weight:900;
+    float:left;font-size:76px;line-height:.7;padding:8px 10px 0 0;color:var(--accent);
+  }
+  .lead-body p{margin:0 0 12px;font-size:16px;}
+  .lead-body p + p{text-indent:1.4em;}
+
+  /* live plate */
+  .plate{
+    border:1px solid var(--line);background:#0e0d0b;
+    box-shadow:0 2px 0 rgba(0,0,0,.15), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--line);
+    position:relative;overflow:hidden;
+  }
+  .plate .frame-bar{
+    background:var(--paper-2);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:6px;padding:6px 10px;
+    font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .plate .dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--line);}
+  .plate .dot.r{background:var(--accent);}.plate .dot.y{background:#c69a2e;}.plate .dot.g{background:var(--accent-2);}
+  .plate .url{margin-left:auto;letter-spacing:.08em;text-transform:none;opacity:.75;}
+  .plate iframe{
+    display:block;width:200%;height:920px;border:0;background:#fff;
+    transform:scale(.5);transform-origin:top left;
+  }
+  .plate.tall iframe{height:1120px;}
+  .plate .shot{
+    display:block;width:100%;height:420px;object-fit:cover;object-position:top center;
+    background:#0e0d0b;filter:contrast(1.03) saturate(1.02);
+  }
+  .plate.tall .shot{height:560px;object-position:top center;}
+  .plate .shot.center{object-position:center;}
+  .plate .live-badge{
+    position:absolute;top:12px;right:12px;z-index:3;
+    background:var(--accent);color:var(--paper);
+    font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.24em;
+    text-transform:uppercase;padding:4px 9px;
+    box-shadow:0 2px 6px rgba(0,0,0,.35);
+    display:flex;align-items:center;gap:6px;
+  }
+  .live-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--paper);animation:blink 1.4s steps(1) infinite;}
+  @keyframes blink{50%{opacity:.25;}}
+  .caption{
+    font-family:"PT Serif",serif;font-style:italic;font-size:12.5px;color:var(--muted);
+    padding:8px 2px 0;border-bottom:1px solid var(--line-soft);
+  }
+  .caption b{font-style:normal;color:var(--ink-soft);}
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head{
+    display:flex;align-items:center;gap:14px;margin:64px 0 8px;
+  }
+  .section-head h2{
+    font-family:"Playfair Display",serif;font-weight:900;
+    font-size:clamp(22px,3.4vw,34px);margin:0;white-space:nowrap;letter-spacing:-.01em;
+  }
+  .section-head .bars{flex:1;height:0;border-top:3px double var(--line);}
+  .section-head .tag{
+    font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.3em;
+    font-size:10px;color:var(--accent);border:1px solid var(--accent);padding:3px 8px;
+  }
+
+  /* ---------- ARTICLE GRID ---------- */
+  .grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:0;
+    border-top:1px solid var(--line);
+  }
+  .story{
+    padding:26px 26px 30px;border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .story:nth-child(odd){border-right:1px solid var(--line-soft);}
+  .story .no{
+    font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center;
+  }
+  .story .no::after{content:"";flex:1;height:1px;background:var(--line-soft);}
+  .story h3{
+    font-family:"Playfair Display",serif;font-weight:900;
+    font-size:clamp(24px,3.2vw,34px);line-height:1;margin:12px 0 6px;letter-spacing:-.01em;
+  }
+  .story .deck{font-style:italic;color:var(--ink-soft);font-size:15.5px;margin:0 0 14px;}
+  .byline{
+    font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.16em;
+    font-size:10px;color:var(--muted);border-top:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft);padding:6px 0;margin:0 0 14px;
+    display:flex;flex-wrap:wrap;gap:6px 14px;
+  }
+  .byline b{color:var(--accent);font-weight:600;}
+  .story .cols{column-count:2;column-gap:20px;column-rule:1px solid var(--line-soft);}
+  .story .cols p{margin:0 0 10px;font-size:14px;}
+  .story .cols p:first-child::first-letter{
+    font-family:"Playfair Display",serif;font-weight:900;font-size:44px;
+    float:left;line-height:.72;padding:4px 7px 0 0;color:var(--ink);
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+  .tag-chip{
+    font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--line);padding:3px 8px;color:var(--ink-soft);background:var(--paper-2);
+  }
+  .readmore{
+    margin-top:16px;display:inline-flex;align-items:center;gap:8px;
+    font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.2em;
+    font-size:11px;text-decoration:none;border-bottom:2px solid var(--accent);
+    padding-bottom:2px;color:var(--ink);
+  }
+  .readmore .arr{color:var(--accent);}
+  .readmore.dead{color:var(--muted);border-bottom-color:var(--line-soft);}
+
+  /* engraving plate (no live site) */
+  .engrave{
+    aspect-ratio:16/10;margin:2px 0 16px;border:1px solid var(--line);
+    position:relative;overflow:hidden;background:var(--paper-2);
+    box-shadow:inset 0 0 0 5px var(--paper), inset 0 0 0 6px var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .engrave .mono{
+    font-family:"UnifrakturCook",serif;font-size:clamp(60px,11vw,120px);
+    color:var(--ink);opacity:.9;position:relative;z-index:2;text-shadow:2px 2px 0 var(--paper);
+  }
+  .engrave .halftone{position:absolute;inset:0;z-index:1;opacity:.5;}
+  .engrave .cap{
+    position:absolute;bottom:8px;left:12px;z-index:3;
+    font-family:"Oswald",sans-serif;font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--muted);background:var(--paper);padding:2px 6px;border:1px solid var(--line-soft);
+  }
+
+  /* ---------- PULL / QUOTE STRIP ---------- */
+  .quote-strip{
+    border-top:3px double var(--line);border-bottom:3px double var(--line);
+    text-align:center;padding:34px 20px;margin:60px 0;
+  }
+  .quote-strip q{
+    font-family:"Playfair Display",serif;font-style:italic;font-weight:700;
+    font-size:clamp(22px,4vw,40px);line-height:1.12;quotes:"“" "”";display:block;max-width:22ch;margin:0 auto;
+  }
+  .quote-strip .attr{
+    font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.3em;
+    font-size:11px;color:var(--accent);margin-top:16px;
+  }
+
+  /* ---------- INDEX / TICKER ---------- */
+  .ledger{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line);margin-top:8px;
+  }
+  .ledger div{
+    padding:16px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+    text-align:center;
+  }
+  .ledger .n{font-family:"Playfair Display",serif;font-weight:900;font-size:40px;line-height:1;}
+  .ledger .l{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:10px;color:var(--muted);margin-top:6px;}
+
+  /* ---------- COLOPHON ---------- */
+  footer{
+    margin-top:70px;border-top:3px double var(--line);padding-top:26px;
+    display:grid;grid-template-columns:2fr 1fr 1fr;gap:26px;
+  }
+  footer h4{font-family:"Playfair Display SC",serif;font-size:13px;letter-spacing:.2em;margin:0 0 10px;text-transform:uppercase;}
+  footer p,footer a{font-size:13px;color:var(--ink-soft);text-decoration:none;display:block;margin:0 0 6px;}
+  footer a:hover{color:var(--accent);}
+  .colophon-note{
+    text-align:center;font-family:"Special Elite",monospace;font-size:11px;color:var(--muted);
+    margin-top:40px;padding-top:16px;border-top:1px solid var(--line-soft);letter-spacing:.05em;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.live-badge::before{animation:none;}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:820px){
+    .lead-grid{grid-template-columns:1fr;}
+    .lead-grid .col-left{border-right:0;border-bottom:1px solid var(--line);}
+    .grid{grid-template-columns:1fr;}
+    .story:nth-child(odd){border-right:0;}
+    .story .cols{column-count:1;}
+    .ledger{grid-template-columns:repeat(2,1fr);}
+    footer{grid-template-columns:1fr;}
+    .plate iframe{height:780px;}
+  }
+</style>
+</head>
+<body>
+<div class="fold"></div>
+<div class="sheet">
+
+  <!-- ===================== MASTHEAD ===================== -->
+  <header>
+    <div class="brow">
+      <span>Vol. MMXXVI — No. 07</span>
+      <span class="mid">★ Independent · Handcrafted · Type-set in Newsprint ★</span>
+      <span>Est. 2024</span>
+    </div>
+
+    <div class="nameplate">
+      <h1>The&nbsp;Anubrat&nbsp;Dispatch</h1>
+      <div class="sub">Selected Works &nbsp;·&nbsp; A Broadsheet of Web Applications &nbsp;·&nbsp; Portfolio Edition</div>
+    </div>
+
+    <div class="dateline">
+      <span>Monday, July 6, 2026</span>
+      <span>“All the software that’s fit to ship”</span>
+      <span class="price">Full Stack · Free Press</span>
+    </div>
+  </header>
+
+  <!-- ===================== LEAD STORY ===================== -->
+  <section>
+    <div class="kicker reveal">Front Page · Featured Deployment</div>
+    <h2 class="lead-head reveal">A Premium Education Platform, Set in Motion</h2>
+    <p class="lead-deck reveal">IICE&nbsp;Kalinga fuses ERP, LMS and CRM into one enterprise-grade product — with the polish of Stripe, Linear and Vercel.</p>
+    <div class="rule-fancy reveal"><span>❦</span></div>
+
+    <div class="lead-grid">
+      <div class="col-left reveal">
+        <div class="lead-body dropcap">
+          <p>The lead story of this edition is a full education ecosystem built for institutions that expect the software to feel as considered as the campus itself. IICE&nbsp;Kalinga is engineered on Next.js&nbsp;15 and React&nbsp;19, hand-tuned in TypeScript, and dressed in a bespoke design system with dual light and dark themes.</p>
+          <p>Phase one — the entire public marketing surface and design system — ships production-quality: fully responsive, motion-choreographed with Framer&nbsp;Motion, and passing a clean type-checked build with zero errors. Subsequent phases stage the database, role-based portals, payments and integrations.</p>
+          <p>Presented at right, live and unretouched, straight from the press.</p>
+        </div>
+        <div class="tags">
+          <span class="tag-chip">Next.js 15</span><span class="tag-chip">React 19</span>
+          <span class="tag-chip">TypeScript</span><span class="tag-chip">Tailwind CSS</span>
+          <span class="tag-chip">Framer Motion</span><span class="tag-chip">shadcn primitives</span>
+        </div>
+        <a class="readmore" href="https://deploy-iice.vercel.app" target="_blank" rel="noopener">Read the live edition <span class="arr">→</span></a>
+      </div>
+
+      <div class="reveal">
+        <div class="plate tall">
+          <span class="live-badge">On Press · Live</span>
+          <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">deploy-iice.vercel.app</span></div>
+          <img class="shot" src="shots/iice.png" alt="IICE Kalinga live site" loading="lazy" />
+        </div>
+        <div class="caption"><b>PLATE I.</b> IICE&nbsp;Kalinga, photographed live from its Vercel deployment.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LEDGER ===================== -->
+  <div class="section-head reveal">
+    <h2>By the Numbers</h2><div class="bars"></div><span class="tag">Circulation</span>
+  </div>
+  <div class="ledger reveal">
+    <div><div class="n">07</div><div class="l">Applications</div></div>
+    <div><div class="n">02</div><div class="l">Live on Press</div></div>
+    <div><div class="n">05</div><div class="l">Domains Covered</div></div>
+    <div><div class="n">∞</div><div class="l">Attention to Craft</div></div>
+  </div>
+
+  <!-- ===================== SECOND LIVE STORY ===================== -->
+  <div class="section-head reveal">
+    <h2>Metro Desk</h2><div class="bars"></div><span class="tag">Live Deployment</span>
+  </div>
+  <div class="grid">
+    <div class="story reveal">
+      <div class="no">Story No. 02 · Campus Operations</div>
+      <h3>Laundry, Without the Waiting Room</h3>
+      <p class="deck">A hostel laundry system that ends the pilgrimage to the machines — track, queue and get notified.</p>
+      <div class="byline"><span>Filed under <b>Product</b></span><span>Stack: Next.js 14 · Express · PostgreSQL · Prisma</span></div>
+      <div class="cols">
+        <p>Smart Laundry replaces the physical check with a live status feed for university hostels. Students submit orders, watch their place in the queue, and review a full history without leaving their room.</p>
+        <p>Staff work a dedicated dashboard to advance order states; administrators oversee analytics, pricing and staffing. Login is password-free via OTP, and Twilio-backed SMS fires the moment a load is ready.</p>
+      </div>
+      <div class="tags">
+        <span class="tag-chip">Next.js 14</span><span class="tag-chip">TypeScript</span>
+        <span class="tag-chip">Express</span><span class="tag-chip">Prisma</span>
+        <span class="tag-chip">PostgreSQL</span><span class="tag-chip">Twilio SMS</span><span class="tag-chip">OTP Auth</span>
+      </div>
+      <a class="readmore" href="https://smartlaundry-mu.vercel.app" target="_blank" rel="noopener">Visit the deployment <span class="arr">→</span></a>
+    </div>
+    <div class="story reveal" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="plate">
+        <span class="live-badge">On Press · Live</span>
+        <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">smartlaundry-mu.vercel.app</span></div>
+        <img class="shot center" src="shots/smartlaundry.png" alt="Smart Laundry live site" loading="lazy" />
+      </div>
+      <div class="caption"><b>PLATE II.</b> Smart Laundry, live from press — the student, staff &amp; admin portal desk.</div>
+    </div>
+  </div>
+
+  <!-- ===================== QUOTE STRIP ===================== -->
+  <div class="quote-strip reveal">
+    <q>Software should read like a well-set page — considered, legible, and quietly confident.</q>
+    <div class="attr">— From the Editor’s Desk</div>
+  </div>
+
+  <!-- ===================== NATIONAL / PROJECTS ===================== -->
+  <div class="section-head reveal">
+    <h2>National Desk</h2><div class="bars"></div><span class="tag">Selected Works</span>
+  </div>
+  <div class="grid">
+
+    <!-- CampusOS -->
+    <div class="story reveal">
+      <div class="no">Story No. 03 · Enterprise · RBAC</div>
+      <div class="engrave">
+        <svg class="halftone" viewBox="0 0 200 125" preserveAspectRatio="none"><defs><pattern id="ht3" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#181510"/></pattern></defs><rect width="200" height="125" fill="url(#ht3)"/></svg>
+        <span class="mono">C</span>
+        <span class="cap">CampusOS · Fig. 3</span>
+      </div>
+      <h3>CampusOS — Real Access, Not Hidden Buttons</h3>
+      <p class="deck">A five-tier college ERP where role-based access is enforced on the backend and the frontend alike.</p>
+      <div class="byline"><span>Filed under <b>Full-Stack</b></span><span>React · Node · Express · SQLite · JWT</span></div>
+      <div class="cols">
+        <p>CampusOS models the real chain of authority: University → College → HOD → Faculty → Student. Every JWT carries role and scope, and every route is guarded and scope-filtered — no leaking data one tier up.</p>
+        <p>Students see only their own record: courses, attendance, PDF marksheets, fees and payment. Faculty take attendance and grade. The result is a data-dense dashboard with genuine, enforced permissions in light and dark.</p>
+      </div>
+      <div class="tags"><span class="tag-chip">React (Vite)</span><span class="tag-chip">Node · Express</span><span class="tag-chip">SQLite</span><span class="tag-chip">JWT · RBAC</span><span class="tag-chip">PDF Export</span></div>
+      <a class="readmore dead" href="#" onclick="return false">Private repository · By request <span class="arr">▪</span></a>
+    </div>
+
+    <!-- SmartServe -->
+    <div class="story reveal">
+      <div class="no">Story No. 04 · Sustainability · ESG</div>
+      <div class="engrave">
+        <svg class="halftone" viewBox="0 0 200 125" preserveAspectRatio="none"><defs><pattern id="ht4" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.7" fill="#1c3a2e"/></pattern></defs><rect width="200" height="125" fill="url(#ht4)"/></svg>
+        <span class="mono">S</span>
+        <span class="cap">SmartServe · Fig. 4</span>
+      </div>
+      <h3>SmartServe — From the Kitchen to the NGO</h3>
+      <p class="deck">An ESG platform routing surplus food from kitchens to the people who need it, with the reporting to prove it.</p>
+      <div class="byline"><span>Filed under <b>Impact</b></span><span>Firebase · Cloud · Docker</span></div>
+      <div class="cols">
+        <p>SmartServe turns kitchen surplus into measured impact. It captures available food, matches it to nearby NGOs, and closes the loop with an auditable flow from source to distribution.</p>
+        <p>Built on Firebase with a containerised deployment, it ships with ESG feature flows and demo data engineered for a boardroom-ready presentation — a social good story told in dashboards.</p>
+      </div>
+      <div class="tags"><span class="tag-chip">Firebase</span><span class="tag-chip">Realtime DB</span><span class="tag-chip">Docker</span><span class="tag-chip">ESG Analytics</span><span class="tag-chip">Cloud Hosting</span></div>
+      <a class="readmore dead" href="#" onclick="return false">Private repository · By request <span class="arr">▪</span></a>
+    </div>
+
+    <!-- Student Loan Smart Planner -->
+    <div class="story reveal">
+      <div class="no">Story No. 05 · Fintech</div>
+      <div class="engrave">
+        <svg class="halftone" viewBox="0 0 200 125" preserveAspectRatio="none"><defs><pattern id="ht5" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.3" fill="#8a1c12"/></pattern></defs><rect width="200" height="125" fill="url(#ht5)"/></svg>
+        <span class="mono">₹</span>
+        <span class="cap">Loan Planner · Fig. 5</span>
+      </div>
+      <h3>The Student Loan, Made Legible</h3>
+      <p class="deck">A fintech planner that turns EMIs, comparisons and early repayment into visual, animated insight.</p>
+      <div class="byline"><span>Filed under <b>Finance</b></span><span>React 19 · Vite · Recharts · Framer Motion</span></div>
+      <div class="cols">
+        <p>The Smart Planner treats a loan like a product you can actually reason about. Real-time sliders drive an EMI calculator; a comparison engine weighs up to five loans and highlights the best; a repayment planner charts the interest saved and the months shaved off.</p>
+        <p>Behind the glass-morphism dark theme sits secure JWT access-and-refresh auth and a dashboard of pie, bar and area charts — a production-minded fintech MVP.</p>
+      </div>
+      <div class="tags"><span class="tag-chip">React 19</span><span class="tag-chip">Vite</span><span class="tag-chip">Tailwind v4</span><span class="tag-chip">Recharts</span><span class="tag-chip">Framer Motion</span><span class="tag-chip">JWT Auth</span></div>
+      <a class="readmore dead" href="#" onclick="return false">Private repository · By request <span class="arr">▪</span></a>
+    </div>
+
+    <!-- Carbon Sync Hub -->
+    <div class="story reveal">
+      <div class="no">Story No. 06 · Climate Tech</div>
+      <div class="engrave">
+        <svg class="halftone" viewBox="0 0 200 125" preserveAspectRatio="none"><defs><pattern id="ht6" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.9" fill="#1c3a2e"/></pattern></defs><rect width="200" height="125" fill="url(#ht6)"/></svg>
+        <span class="mono">C₂</span>
+        <span class="cap">Carbon Sync · Fig. 6</span>
+      </div>
+      <h3>Carbon Sync Hub — A Ledger for Emissions</h3>
+      <p class="deck">A climate-tech hub for syncing, tracking and visualising carbon data in one typed interface.</p>
+      <div class="byline"><span>Filed under <b>Climate</b></span><span>TypeScript · React · Modern Tooling</span></div>
+      <div class="cols">
+        <p>Carbon Sync Hub gathers sustainability signals into a single source of truth — a typed, component-driven front end designed to make carbon accounting legible rather than lost in spreadsheets.</p>
+        <p>It leans on a modern React and TypeScript stack with a clean, accessible UI kit, built to grow from prototype into a genuine emissions dashboard.</p>
+      </div>
+      <div class="tags"><span class="tag-chip">TypeScript</span><span class="tag-chip">React</span><span class="tag-chip">Vite</span><span class="tag-chip">Tailwind</span><span class="tag-chip">Component UI</span></div>
+      <a class="readmore dead" href="#" onclick="return false">Private repository · By request <span class="arr">▪</span></a>
+    </div>
+
+    <!-- Lab Pulse -->
+    <div class="story reveal">
+      <div class="no">Story No. 07 · EdTech · Proctoring</div>
+      <div class="engrave">
+        <svg class="halftone" viewBox="0 0 200 125" preserveAspectRatio="none"><defs><pattern id="ht7" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#181510"/></pattern></defs><rect width="200" height="125" fill="url(#ht7)"/></svg>
+        <span class="mono">L</span>
+        <span class="cap">Lab Pulse · Fig. 7</span>
+      </div>
+      <h3>Lab Pulse — The Exam Hall, Instrumented</h3>
+      <p class="deck">A live lab-exam platform with WebRTC screen-sharing, seat capacity control and real-time dashboards.</p>
+      <div class="byline"><span>Filed under <b>EdTech</b></span><span>React · Firebase · WebRTC · Chart.js</span></div>
+      <div class="cols">
+        <p>Lab Pulse runs practical examinations at scale. WebRTC screen-sharing gives invigilators a live window into each station; a capacity engine manages seats and dead-seat recovery; bulk import onboards whole cohorts in one pass.</p>
+        <p>Chart.js dashboards keep the session legible in real time, and the platform was hardened with dedicated load-testing and Firebase security rules — built for exam day, not just the demo.</p>
+      </div>
+      <div class="tags"><span class="tag-chip">React</span><span class="tag-chip">Firebase</span><span class="tag-chip">WebRTC</span><span class="tag-chip">Chart.js</span><span class="tag-chip">Load-Tested</span></div>
+      <a class="readmore dead" href="#" onclick="return false">Private repository · By request <span class="arr">▪</span></a>
+    </div>
+
+    <!-- Editor's filler cell -->
+    <div class="story reveal" style="display:flex;flex-direction:column;justify-content:center;text-align:center;">
+      <div class="no" style="justify-content:center;">Classifieds</div>
+      <h3 style="font-size:26px;">Available for Commissions</h3>
+      <p class="deck" style="text-align:center;">Full-stack web applications — ERP, fintech, ESG and campus platforms — designed and built end to end.</p>
+      <p style="font-family:'Special Elite',monospace;font-size:13px;color:var(--muted);">Enquiries to the address in the colophon below.</p>
+      <a class="readmore" style="align-self:center;" href="https://github.com/anubrat1606" target="_blank" rel="noopener">See the full press <span class="arr">→</span></a>
+    </div>
+
+  </div>
+
+  <!-- ===================== COLOPHON ===================== -->
+  <footer class="reveal">
+    <div>
+      <h4>The Anubrat Dispatch</h4>
+      <p>A hand-set broadsheet cataloguing selected web applications — ERP systems, fintech planners, sustainability platforms and campus tooling — built full-stack across React, Next.js, TypeScript, Node and Firebase.</p>
+      <p style="margin-top:10px;font-style:italic;">Design direction: newsprint / editorial broadsheet.</p>
+    </div>
+    <div>
+      <h4>The Press Room</h4>
+      <a href="https://github.com/anubrat1606" target="_blank" rel="noopener">GitHub — anubrat1606 →</a>
+      <a href="https://deploy-iice.vercel.app" target="_blank" rel="noopener">IICE Kalinga (live) →</a>
+      <a href="https://smartlaundry-mu.vercel.app" target="_blank" rel="noopener">Smart Laundry (live) →</a>
+    </div>
+    <div>
+      <h4>Desks</h4>
+      <p>Enterprise · RBAC</p>
+      <p>Fintech · Payments</p>
+      <p>Sustainability · ESG</p>
+      <p>EdTech · Proctoring</p>
+    </div>
+  </footer>
+
+  <div class="colophon-note">— Type-set in UnifrakturCook, Playfair Display &amp; PT Serif · Printed on virtual newsprint · © MMXXVI —</div>
+
+</div>
+
+<script>
+  // Gentle print-reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
